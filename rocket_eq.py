@@ -2,9 +2,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-
-#this should be an equation that takes a time and returns and altitude?
-#assumptions, 1D
+#Simulation goals
+#1 make 1d simulation 
+#   hope to get general idea of problem and start making design decisions
+#2 make 3 dof sim
+#   rocket can move in x, y, and rotate about cg
+#3 expand to 9 dof
+#   
 
 #Faero = 
 #xdot = (fthrust + fgrav)/mass 
@@ -45,7 +49,7 @@ def plot(t):
     boost_f = 80.0 #m/s^2
     boost_m = 0.2 #kg
 
-    land_ig = 15 #s
+    land_ig = 15 #s  time of second ignition
     land_dur = 1.0 #s
     land_f = 80.0 #
     land_m = 0.2 #kg
