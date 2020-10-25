@@ -10,7 +10,14 @@ class estes_rocket_def:
         self.propellant_mass = propellant_mass #kg
         self.thrust_duration = thrust_duration #s
 
-
+class rocket:
+    def __init__(self, name, launch_engine, land_engine, lander_controller, other_mass, aero):
+        self.name = name
+        self.launch_engine = launch_engine
+        self.land_engine = land_engine
+        self.lander_controller = lander_controller
+        self.other_mass = other_mass
+        self.aero = aero
 
 estes_b4_2 = estes_rocket_def("B4-2",5.0,2.0,0.113,0.0198,0.00833,1.1)
 
