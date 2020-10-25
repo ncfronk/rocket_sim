@@ -47,12 +47,12 @@ def plot(t):
 
     boost_dur = 1.0 #seconds
     boost_f = 80.0 #m/s^2
-    boost_m = 0.2 #kg
+    #boost_m = 0.2 #kg
 
     land_ig = 15 #s  time of second ignition
     land_dur = 1.0 #s
     land_f = 80.0 #
-    land_m = 0.2 #kg
+    #land_m = 0.2 #kg
 
     t, h = 0.0, 0.02
     ta, x, v = [0], [0], [0]
