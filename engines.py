@@ -11,11 +11,13 @@ class estes_rocket_def:
         self.thrust_duration = thrust_duration #s
 
 class rocket:
-    def __init__(self, name, launch_engine, land_engine, body_properties):
+    def __init__(self, name, launch_engine, land_engine, body_properties, theta):
         self.name = name
         self.launch_engine = launch_engine
         self.land_engine = land_engine
         self.body_properties = body_properties #this should be the shape, dimensions, CG, CP
+        self.position = [0, 0]
+        self.theta = theta # degrees
 
 class body_properties: #2 dimensional, x, y
     def __init__(self, width, heigth, cg, cp):
@@ -30,4 +32,4 @@ estes_d12_0 = estes_rocket_def("D12-0",20.0,-1,0.396,0.0409,0.02493,1.6)
 
 rocket_body = body_properties(0.005,0.060,0.030,0.010)
 
-rocket_sample = rocket("try1",estes_d12_0,estes_b4_2,rocket_body)
+rocket_sample = rocket("try1",estes_d12_0,estes_b4_2,rocket_body, 90.0)
