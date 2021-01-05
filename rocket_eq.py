@@ -1,6 +1,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+from engines import *
 
 #Simulation goals
 #1 make 1d simulation 
@@ -9,6 +10,15 @@ import matplotlib.pyplot as plt
 #   rocket can move in x, y, and rotate about cg
 #3 expand to 9 dof
 #   
+
+estes_b4_2 = estes_rocket_def(name="B4-2",total_impulse=5.0,time_delay=2.0,max_lift_weight=0.113,total_mass=0.0198,propellant_mass=0.00833,thrust_duration=1.1)
+
+estes_d12_0 = estes_rocket_def(name="D12-0",total_impulse=20.0,time_delay=-1,max_lift_weight=0.396,total_mass=(0.0409+0.05),propellant_mass=0.02493,thrust_duration=1.6)
+
+rocket_body = body_properties(width=0.005,heigth=0.060,cg=0.030,cp=0.010,mass=0.1)
+
+rocket_sample = rocket(launch_engine=estes_d12_0,land_engine=estes_b4_2,body_properties=rocket_body)
+
 
 #Faero = 
 #xdot = (fthrust + fgrav)/mass 
@@ -45,14 +55,14 @@ def plot(t):
     g = -9.8 #m/s
 
 
-    boost_dur = 1.0 #seconds
-    boost_f = 80.0 #m/s^2
-    #boost_m = 0.2 #kg
+    boost_dur = rocket_sample.launch_engine.thrust_duration #1.0 #seconds
+    boost_m = rocket_sample.current_mass #kg
+    avg_thrust = (rocket_sample.launch_engine.total_impulse/boost_dur) #N== kg m/s^2
+    boost_f = avg_thrust/(boost_m)  #80.0 #m/s^2
 
-    land_ig = 15 #s  time of second ignition
-    land_dur = 1.0 #s
-    land_f = 80.0 #
-    #land_m = 0.2 #kg
+
+    land_ig = 16 #s  time of second ignition
+    #
 
     t, h = 0.0, 0.02
     ta, x, v = [0], [0], [0]
@@ -60,9 +70,14 @@ def plot(t):
 
     #1.boost 
     print("boost stage at t = 0")
+    
+    print("boost : ", boost_f)
     ta,v,x = run(h, boost_dur, ta, v, x, g, boost_f)
     print("t,v,x : ", ta[-1],v[-1],x[-1])
     
+
+    ## now subtract mass of motor\
+    rocket_sample.current_mass = rocket_sample.current_mass - rocket_sample.launch_engine.total_mass ## this is a point where we could lose more masss, will explain in 1 sec
 
     #2.coast
     
@@ -70,15 +85,23 @@ def plot(t):
     print("second burn started  at : ", b_end)
     ta,v,x = run(h, land_ig-boost_dur, ta, v, x, g, 0)
 
+    
+    land_dur = rocket_sample.land_engine.thrust_duration #s
+    land_m = rocket_sample.current_mass
+    land_avg_thrust = rocket_sample.land_engine.total_impulse/land_dur
+    land_f = land_avg_thrust/land_m #
+    #land_m = 0.2 #kg
+
     #3.secondary
+    print("boost : ", land_f)
     l_start = ta[-1]
     print("second burn started  at : ", l_start)
     ta,v,x = run(h, land_dur, ta, v, x, g, land_f)
 
-    #4.land 
+    #4. coast to land 
     l_end = ta[-1]
     print("run till ground at : ", l_end)
-    ta,v,x = run(h, land_dur, ta, v, x, g, 0)
+    ta,v,x = run(h, 1000, ta, v, x, g, 0)
 
     stop = ta[-1]
 

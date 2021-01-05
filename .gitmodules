@@ -1,0 +1,3 @@
+[submodule "mpkuse_submod"]
+	path = mpkuse_submod
+	url = https://github.com/mpkuse/inverted_pendulum.git
