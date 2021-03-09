@@ -26,13 +26,14 @@ class pendulum_draw:
         cv2.line(IM, (0, 450), (IM.shape[1], 450), (19,69,139), 4 )
 
         # Pendulum bearing dot
-        cv2.circle( IM, (0, thrust_center_length*2), 10, (255,255,255), -1 )
+        cv2.circle( IM, (0, 0.5), 10, (255,255,255), -1 )
         # Thrust vector dot
-        cv2.circle( IM, (, ), 10, (255,255,255), -1 )
+        cv2.circle( IM, (1, 1), 10, (255,255,255), -1 )
         # fin resistance dot
-        cv2.circle( IM, (, ), 10, (255,255,255), -1 )
+        cv2.circle( IM, (0, 1), 10, (255,255,255), -1 )
 
-
+        #penduluum holder
+        cv2.rectangle( IM, (-0.1,0),(0.1,0.5),(255,255,255), -1 )
 
         # Pendulum
         pendulum_fin_end = int( LENGTH_OF_PENDULUM * np.cos( BOB_ANG / 180. * np.pi ) )

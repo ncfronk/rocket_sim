@@ -43,4 +43,4 @@ anim = animation.FuncAnimation(fig, animate, init_func=init,
 							frames=500, interval=20, blit=True) 
 
 # save the animation as mp4 video file 
-anim.save('gifs/coil.gif',writer='imagemagick') 
+anim.save('gifs/coil.gif',writer='Pillow') 
