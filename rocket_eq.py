@@ -18,7 +18,7 @@ estes_d12_0 = estes_rocket_def(name="D12-0",total_impulse=20.0,time_delay=-1,max
 rocket_body = body_properties(width=0.005,heigth=0.060,cg=0.030,cp=0.010,mass=0.1)
 
 rocket_sample = rocket(launch_engine=estes_d12_0,land_engine=estes_b4_2,body_properties=rocket_body)
-
+ 
 
 #Faero = 
 #xdot = (fthrust + fgrav)/mass 
