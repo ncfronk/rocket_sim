@@ -12,12 +12,15 @@ from engines import *
 #   
 
 estes_b4_2 = estes_rocket_def(name="B4-2",total_impulse=5.0,time_delay=2.0,max_lift_weight=0.113,total_mass=0.0198,propellant_mass=0.00833,thrust_duration=1.1)
+estes_c6_3 = estes_rocket_def(name="C4-3",total_impulse=10.0,time_delay=3.0,max_lift_weight=0.113,total_mass=0.0258,propellant_mass=0.01248,thrust_duration=1.6)
 
-estes_d12_0 = estes_rocket_def(name="D12-0",total_impulse=20.0,time_delay=-1,max_lift_weight=0.396,total_mass=(0.0409+0.05),propellant_mass=0.02493,thrust_duration=1.6)
+estes_d12_4 = estes_rocket_def(name="D12-0",total_impulse=20.0,time_delay=4,max_lift_weight=0.396,total_mass=(0.043),propellant_mass=0.02493,thrust_duration=1.6)
 
-rocket_body = body_properties(width=0.005,heigth=0.060,cg=0.030,cp=0.010,mass=0.1)
+ejected_mass = 0.107 #kg
 
-rocket_sample = rocket(launch_engine=estes_d12_0,land_engine=estes_b4_2,body_properties=rocket_body)
+rocket_body = body_properties(width=0.005,heigth=0.060,cg=0.030,cp=0.010,mass=0.3)
+
+rocket_sample = rocket(launch_engine=estes_d12_4,land_engine=estes_c6_3,body_properties=rocket_body)
  
 
 #Faero = 
@@ -61,7 +64,7 @@ def plot(t):
     boost_f = avg_thrust/(boost_m)  #80.0 #m/s^2
 
 
-    land_ig = 16 #s  time of second ignition
+    land_ig = 9.25 #s  time of second ignition
     #
 
     t, h = 0.0, 0.02
@@ -75,9 +78,10 @@ def plot(t):
     ta,v,x = run(h, boost_dur, ta, v, x, g, boost_f)
     print("t,v,x : ", ta[-1],v[-1],x[-1])
     
-
+    v_max = np.max(v)
     ## now subtract mass of motor\
-    rocket_sample.current_mass = rocket_sample.current_mass - rocket_sample.launch_engine.total_mass ## this is a point where we could lose more masss, will explain in 1 sec
+
+    rocket_sample.current_mass = rocket_sample.current_mass - (rocket_sample.launch_engine.total_mass + ejected_mass) ## this is a point where we could lose more masss, will explain in 1 sec
 
     #2.coast
     
