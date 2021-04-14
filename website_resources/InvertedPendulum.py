@@ -92,8 +92,6 @@ class InvertedPendulum:
         if t is not None:
             cv2.putText(IM, "t="+str(np.round(t, 4))+"sec", (15, 15),
                         cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.8, (200, 200, 250), 1)
-            cv2.putText(IM, "ANG="+str(np.round(BOB_ANG, 4))+" degrees",
-                        (15, 35), cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.8, (200, 200, 250), 1)
             cv2.putText(IM, "POS="+str(np.round(CART_POS, 4))+" m", (15, 55),
                         cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.8, (200, 200, 250), 1)
 
@@ -109,15 +107,6 @@ if __name__ == "__main__":
     stheta = np.pi/3
     t = 0.
     while True:
-        # x += sx*0.1
-        # theta += stheta*1.
-        # if( x > 5 ):
-        #     sx = -1.
-        # if( x < -5 ):
-        #     sx = 1.0
-
-        # theta = -9.8 / 1.5 * np.cos( t ) + 95.0 + 9.8/1.5
-
         rendered = syst.step([x, 0, theta, 0])
         cv2.imshow('im', rendered)
 
