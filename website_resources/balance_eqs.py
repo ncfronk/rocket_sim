@@ -1,17 +1,21 @@
-# this is a simple kinimatics balance set
+d_imp = 30
+c_imp = 20
 
-#start with energy going up
-import matplotlib.pyplot as plt
-import matplotlib.animation as ani
-import numpy as np
 
-import engines as eng
+land_mass = 150
+booster_mass = 43
 
-#maximum_mass = eng.estes_d12_3.max_lift_weight
-maximum_mass = (eng.estes_d12_3.max_lift_weight)
+# d_imp*launch_mass = c_imp*land_mass
+# d_imp*(ejected_mass + land_mass) = c_imp*(land_mass)
+variable_mass = (d_imp/c_imp)*(land_mass) - booster_mass - land_mass
 
-    land_dur = rocket_sample.land_engine.thrust_duration #s
-    land_m = rocket_sample.current_mass
-    land_avg_thrust = rocket_sample.land_engine.total_impulse/land_dur
-    land_f = land_avg_thrust/land_m #
+ejected_mass = booster_mass + variable_mass
 
+launch_mass = land_mass + ejected_mass
+
+
+print(launch_mass) 
+
+print(land_mass) 
+
+print(variable_mass)
