@@ -11,14 +11,7 @@ from engines import *
 #3 expand to 9 dof
 #   
 
-estes_b4_2 = estes_rocket_def(name="B4-2",total_impulse=5.0,time_delay=2.0,max_lift_weight=0.113,total_mass=0.0198,propellant_mass=0.00833,thrust_duration=1.1)
 
-estes_d12_0 = estes_rocket_def(name="D12-0",total_impulse=20.0,time_delay=-1,max_lift_weight=0.396,total_mass=(0.0409+0.05),propellant_mass=0.02493,thrust_duration=1.6)
-
-rocket_body = body_properties(width=0.005,heigth=0.060,cg=0.030,cp=0.010,mass=0.1)
-
-rocket_sample = rocket(launch_engine=estes_d12_0,land_engine=estes_b4_2,body_properties=rocket_body)
- 
 
 #Faero = 
 #xdot = (fthrust + fgrav)/mass 
