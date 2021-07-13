@@ -5,8 +5,8 @@ from InvertedPendulum import InvertedPendulum
 
 from scipy.integrate import solve_ivp
 
-import matplotlib.pyplot as plt 
-import matplotlib.animation as animation 
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 
 
 def u(t):
@@ -51,9 +51,17 @@ if __name__ == "__main__":
 
     for i, t in enumerate(sol.t):
         rendered = syst.step([sol.y[0, i], sol.y[1, i], sol.y[2, i]], t)
-        cv2.imshow('im', rendered)
-        cv2.moveWindow('im', 100, 100)
+        # cv2.imshow('im', rendered)
+        # cv2.moveWindow('im', 100, 100)
 
-        if cv2.waitKey(30) == ord('q'):
-            break
+        # if cv2.waitKey(30) == ord('q'):
+        #     break
 
+plt.style.use('dark_background')
+
+fig = plt.figure()
+ax = plt.axes(xlim=(-50, 50), ylim=(-50, 50))
+line, = ax.plot([], [], lw=2)
+
+anim = animation.FuncAnimation(fig, syst, frames=500, interval=20, blit=True)
+anim.save('gifs/try.gif', writer='Pillow')
